@@ -1,42 +1,52 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.w3.org./1999/xhtml">
-<head th:replace="common/header :: common-header" />
+<head>
+  <link href="/css/login.css" rel="stylesheet">
+  <head th:replace="common/header :: common-header" />
+</head>
+
 
 
 <body class="d-flex flex-column">
   <div th:replace="common/header :: navbar"> </div>
 
   <div class="wrapper-login login-reg-panel">
-    <div class="login-info-box">
-      <h2>Have an account?</h2>
-      <p>Lorem ipsum dolor sit amet</p>
-      <label id="label-register" for="log-reg-show">Login</label>
-      <input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
-    </div>
+    <form th:action="@{/login}" method="post" >
+      <div class="login-info-box">
 
-    <div class="register-info-box">
-      <h2>Don't have an account?</h2>
-      <p>Lorem ipsum dolor sit amet</p>
-      <label id="label-login" for="log-login-show">Register</label>
-      <input type="radio" name="active-log-panel" id="log-login-show">
-    </div>
+        <h2>Have an account?</h2>
+        <p>Lorem ipsum dolor sit amet</p>
+        <label id="label-register" for="log-reg-show">Login</label>
+        <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+      </div>
 
-    <div class="white-panel">
-      <div class="login-show">
-        <h2>LOGIN</h2>
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <input type="button" value="Login">
-        <a href="">Forgot password?</a>
+      <div class="register-info-box">
+        <h2>Don't have an account?</h2>
+        <p>Lorem ipsum dolor sit amet</p>
+        <label id="label-login" for="log-login-show">Register</label>
+        <input type="radio" name="active-log-panel" id="log-login-show">
       </div>
-      <div class="register-show">
-        <h2>REGISTER</h2>
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <input type="password" placeholder="Confirm Password">
-        <input type="button" value="Register">
+
+      <div class="white-panel">
+        <div class="login-show">
+          <h2>LOGIN</h2>
+          <input required="required" class="form-control" type="text" placeholder="Tên đăng nhập" th:classappend="${param.error} ? is-invalid" name="username">
+          <input required="required" class="form-control" type="password" placeholder="Mật khẩu" name="password"
+                 th:classappend="${param.error} ? is-invalid" >
+<!--          <input type="submit" value="Login">-->
+          <button type="submit"
+                  class="btn btn-primary btn-block">Đăng nhập</button>
+          <a href="">Forgot password?</a>
+        </div>
+        <div class="register-show">
+          <h2>REGISTER</h2>
+          <input type="text" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <input type="password" placeholder="Confirm Password">
+          <input type="button" value="Register">
+        </div>
       </div>
-    </div>
+    </form>
   </div>
   
 <!--  <div th:replace="common/header :: footer"> </div>-->
