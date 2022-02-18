@@ -43,7 +43,7 @@ public class AccountController {
 	public String log(Model model) {
 		model.addAttribute("usernameExists", model.asMap().get("usernameExists"));
 		model.addAttribute("emailExists", model.asMap().get("emailExists"));
-		return "myAccount";
+		return "myAccount1";
 	}
 	
 	@RequestMapping("/my-profile")
