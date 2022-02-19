@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
 	private RoleRepository roleRepository;
 
 	@Override
+	public List<User> getAllUsers() {
+		return userRepository.findAllBy();
+	}
+
+	@Override
 	public User findById(Long id) {
 		Optional<User> opt = userRepository.findById(id);
 		return opt.get();

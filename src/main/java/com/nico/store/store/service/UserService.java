@@ -6,6 +6,9 @@ import java.util.List;
 import com.nico.store.store.domain.User;
 
 public interface UserService {
+//	List<User> findAllUsers();
+
+	List<User> getAllUsers();
 	
 	User findById(Long id);
 	

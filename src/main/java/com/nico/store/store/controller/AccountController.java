@@ -61,6 +61,16 @@ public class AccountController {
 		model.addAttribute("orders", orders);
 		return "myOrders";
 	}
+
+	@RequestMapping("/users-list")
+	public String articleList(Model model, Authentication authentication) {
+		User user = (User) authentication.getPrincipal();
+		model.addAttribute("user", user);
+
+		List<User> users = userService.getAllUsers();
+		model.addAttribute("users", users);
+		return "userList";
+	}
 	
 	@RequestMapping("/my-address")
 	public String myAddress(Model model, Principal principal) {
