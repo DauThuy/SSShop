@@ -14,6 +14,11 @@ body {
   background-color: #f1f1f1;
 }
 
+#article-list img, #storeProduct img {
+    width: 188px;
+    height: 250px;
+}
+
 a {
 	color: #606975;
 }

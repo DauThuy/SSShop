@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml">
+<!--<head th:replace="common/header :: common-header" />-->
+<head>
+    <head th:replace="common/header :: common-header" />
+    <link rel="stylesheet" href="/css/ava.css">
+</head>
+
+<body class="d-flex flex-column">
+<div th:replace="common/header :: navbar"> </div>
+
+<div class="container page-content">
+    <div class="row">
+        <div class="col-md-4 col-lg-3">
+            <div class="card">
+                <div class="profile-pic-div">
+                    <img src="/image/user/user.png" id="photo" width="100" height="100" alt="User" class="rounded-circle mb-3">
+                    <input type="file" id="file">
+                    <label for="file" id="uploadBtn"><i class="fa-solid fa-camera"></i></label>
+                </div>
+
+                <div>
+                    <h5 class="bold mb-0" id="name_ava" th:text="${#strings.capitalize(user.username)}"></h5>
+                </div>
+
+                <div class="list-group list-group-flush">
+                    <a th:href="@{/my-profile}" class="list-group-item list-group-item-action active"><i data-feather="user" class="mr-3"></i> Profile</a>
+                    <a th:href="@{/my-orders}" class="list-group-item list-group-item-action"><i data-feather="shopping-bag" class="mr-3"></i> Orders</a>
+                    <a th:href="@{/my-address}" class="list-group-item list-group-item-action"><i data-feather="map" class="mr-3"></i> Address</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mt-3 mt-md-0">
+            <div class="card">
+                <div class="card-body">
+                    <h3>My Profile</h3><hr>
+                    <form id="profileForm" th:action="@{/update-user-info}" novalidate method="post">
+                        <div class="form-row">
+                            <div class="form-group col-sm-6">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control"
+                                       id="firstName" name="firstName" th:value="${user.firstName}">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control"
+                                       id="lastName" name="lastName" th:value="${user.lastName}">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="userName">Username</label>
+                                <input required="required" type="text" class="form-control" th:classappend="${usernameExists} ? is-invalid"
+                                       id="userName" name="username" th:value="${user.username}">
+                                <div class="invalid-feedback">Username already in use. Choose another one.</div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="email">Email address</label>
+                                <input required="required" type="text" class="form-control" th:classappend="${emailExists} ? is-invalid"
+                                       id="email" name="email" th:value="${user.email}">
+                                <div class="invalid-feedback">Email already used by an existing account.</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!--  end container -->
+
+<div th:replace="common/header :: footer"> </div>
+<div th:replace="common/header :: body-scripts"> </div>
+
+<script>
+    const imgDiv = document.querySelector('.profile-pic-div');
+    const img = document.querySelector('#photo');
+    const file = document.querySelector('#file');
+    const uploadBtn = document.querySelector('#uploadBtn');
+
+
+    imgDiv.addEventListener('mouseenter', function(){
+        uploadBtn.style.display = "block";
+    });
+
+
+    imgDiv.addEventListener('mouseleave', function(){
+        uploadBtn.style.display = "none";
+    });
+
+
+    file.addEventListener('change', function(){
+        const choosedFile = this.files[0];
+
+        if (choosedFile) {
+
+            const reader = new FileReader(); //FileReader is a predefined function of JS
+
+            reader.addEventListener('load', function(){
+                img.setAttribute('src', reader.result);
+            });
+
+            reader.readAsDataURL(choosedFile);
+        }
+    });
+
+</script>
+</body>
+</html>
