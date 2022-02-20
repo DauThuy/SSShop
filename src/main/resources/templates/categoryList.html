@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header">
+
+<body>
+<div th:replace="adminHome :: navbarAdmin"> </div>
+
+<div class="container page-content">
+    <table id="table-category" class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Danh mục</th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="categories : ${categories}">
+            <td th:text="${categories.id}"></td>
+            <td><div style="display:flex;"><span th:text="${categories.name}" class="badge badge-secondary mt-1 mr-1" ></span></div></td>
+
+            <td><a th:href="@{/admin/showDetailInfoUser?id=}+${categories.id}" class="badge badge-primary">Chi tiết</a>
+                <a th:href="@{/admin/showDetailInfoUser}" class="badge badge-danger">Xóa</a> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="common/header :: body-scripts"> </div>
+
+<script>
+    $(document).ready(function() {
+        $('#table-article').DataTable({
+            stateSave: true
+        });
+    } );
+</script>
+
+</body>

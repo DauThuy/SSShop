@@ -6,6 +6,8 @@ public class UserDTO {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String avatar;
+	private Boolean disable;
 	
 	public UserDTO() {
 	}
@@ -33,6 +35,20 @@ public class UserDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public Boolean getDisable() {
+		return disable;
+	}
+	public void setDisable (Boolean disable) {
+		this.disable = disable;
 	}
 
 }

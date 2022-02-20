@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <!--<head th:replace="common/header :: common-header" />-->
 <head>
     <head th:replace="common/header :: common-header" />
@@ -10,8 +10,9 @@
   <div th:replace="common/header :: navbar"> </div>
 
   <div class="container page-content">
-    <div class="row">    
-      <div class="col-md-4 col-lg-3">
+    <div class="row">
+        <form id="profileForm" th:action="@{/update-user-info}" novalidate method="post">
+        <div class="col-md-4 col-lg-3">
         <div class="card">
 <!--          <div class="card-body text-center">-->
 <!--            <img src="/image/user/user.png" width="100" height="100" alt="User" class="rounded-circle mb-3">-->
@@ -20,11 +21,11 @@
 <!--          </div>-->
 
           <div class="profile-pic-div">
-<!--            <img src="/image/user/user.png" id="photo">-->
-            <img src="/image/user/user.png" id="photo" width="100" height="100" alt="User" class="rounded-circle mb-3">
-            <input type="file" id="file">
+            <img th:src = "@{'/image/user/' + ${user.avatar}}"
+                 id="photo" width="100" height="100" alt="User" class="rounded-circle mb-3">
+            <input type="file" id="file" name="avatar" th:value="${user.avatar}">
             <label for="file" id="uploadBtn"><i class="fa-solid fa-camera"></i></label>
-
+<!--          </form>-->
           </div>
 
             <div>
@@ -57,7 +58,6 @@
           <div class="card">
             <div class="card-body">
               <h3>My Profile</h3><hr>
-              <form id="profileForm" th:action="@{/update-user-info}" novalidate method="post">
                 <div class="form-row">
                   <div class="form-group col-sm-6">
                     <label for="firstName">First Name</label>                        
@@ -118,10 +118,10 @@
                   </div>
                 </div> 
                 <!--  /password check modal -->                
-              </form>
             </div>
           </div>
         </div>
+        </form>
     </div>
 
   </div> <!--  end container -->
@@ -150,13 +150,15 @@
   		$("#txtConfirmPassword").keyup(checkPasswordMatch);
   		$("#txtNewPassword").keyup(checkPasswordMatch);
     	$('#updateUserInfoButton').click(function() {
-    		console.log("clickeo")
-    		if ($('#txtNewPassword').val() == '') {   
+    		if ($('#txtNewPassword').val() == '') {
     			$('#profileForm').submit()    		
     		} else {
     			$('#passwordModal').modal('show');
     		}
+            // var fileName = document.getElementById("photo").files[0].name;
+    		// $('#photo').setAttribute("src", "/image/user/" + fileName + ".png");
     	 });
+
     });
 
     const imgDiv = document.querySelector('.profile-pic-div');
@@ -187,6 +189,7 @@
             });
 
             reader.readAsDataURL(choosedFile);
+
         }
     });
 

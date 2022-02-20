@@ -56,6 +56,9 @@ public class User implements UserDetails {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
+
+	private String avatar;
+	private Boolean disable;
 	
 	public User() {
 	}
@@ -141,6 +144,20 @@ public class User implements UserDetails {
 
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public Boolean getDisable() {
+		return disable;
+	}
+	public void setDisable (Boolean disable) {
+		this.disable = disable;
 	}
 	
 }

@@ -50,6 +50,7 @@ public class AccountController {
 	public String myProfile(Model model, Authentication authentication) {				
 		User user = (User) authentication.getPrincipal();
 		model.addAttribute("user", user);
+		model.addAttribute("ava", user.getAvatar());
 		return "myProfile";
 	}
 	
@@ -78,7 +79,7 @@ public class AccountController {
 		model.addAttribute("user", user);
 		return "myAddress";
 	}
-	
+
 	@RequestMapping(value="/update-user-address", method=RequestMethod.POST)
 	public String updateUserAddress(@ModelAttribute("address") Address address, 
 			Model model, Principal principal) throws Exception {
@@ -122,6 +123,9 @@ public class AccountController {
 								  @RequestParam("newPassword") String newPassword,
 								  Model model, Principal principal) throws Exception {
 		User currentUser = userService.findByUsername(principal.getName());
+
+
+
 		if(currentUser == null) {
 			throw new Exception ("User not found");
 		}
@@ -151,7 +155,19 @@ public class AccountController {
 		currentUser.setFirstName(user.getFirstName());
 		currentUser.setLastName(user.getLastName());
 		currentUser.setUsername(user.getUsername());
-		currentUser.setEmail(user.getEmail());		
+		currentUser.setEmail(user.getEmail());
+
+//		if (user.getAvatar().trim().isEmpty()) {
+//			currentUser.setAvatar(currentUser.getAvatar());
+//		}
+
+//		if (!user.getAvatar().trim().isEmpty()) {
+////			currentUser.setAvatar(currentUser.getAvatar());
+////			currentUser.setAvatar(user.getAvatar());
+//		}
+
+		currentUser.setAvatar(user.getAvatar());
+		currentUser.setDisable(user.getDisable());
 		userService.save(currentUser);
 		model.addAttribute("updateSuccess", true);
 		model.addAttribute("user", currentUser);				
