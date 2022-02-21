@@ -12,17 +12,17 @@
             <th>ID</th>
             <th>Tên</th>
             <th>Email</th>
-            <th>Operation</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr data-th-each="users : ${users}">
             <td th:text="${users.id}"></td>
-            <td><div style="display:flex;"><span th:text="${users.getUsername()}" class="badge badge-secondary mt-1 mr-1" ></span></div></td>
-            <td><div style="display:flex;"><span th:text="${users.getEmail()}" class="badge badge-secondary mt-1 mr-1" ></span></div></td>
+            <td><div style="display:flex;"><span th:text="${users.getUsername()}" class="" ></span></div></td>
+            <td><div style="display:flex;"><span th:text="${users.getEmail()}" class="" ></span></div></td>
 
             <td><a th:href="@{/admin/showDetailInfoUser?id=}+${users.id}" class="badge badge-primary">Chi tiết</a>
-                <a th:href="@{/admin/showDetailInfoUser}" class="badge badge-danger">Xóa</a> </td>
+                <a th:href="@{/admin/showDetailInfoUser}" class="badge badge-danger">Vô hiệu xóa</a> </td>
         </tr>
         </tbody>
     </table>
